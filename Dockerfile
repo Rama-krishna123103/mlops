@@ -1,31 +1,18 @@
-# Stage 1: Build dependencies using a builder image
-FROM python:3.9-slim AS builder
-
-# Set the working directory inside the container
-WORKDIR /app
-
-# Copy only requirements.txt to install dependencies first (caching optimization)
-COPY requirements.txt .
-
-# Install dependencies, and clean up the pip cache to reduce image size
-RUN pip install --no-cache-dir -r requirements.txt && \
-    rm -rf /root/.cache
-
-# Stage 2: Final image (smaller size)
+# Use the official Python 3.9 slim image as a base
 FROM python:3.9-slim
 
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy installed dependencies from the builder stage
-COPY --from=builder /app /app
+# Copy the requirements file and install dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application code and model into the container
+# Copy the rest of the application code
 COPY . .
+
+# Copy the trained model into the container
 COPY model.pkl /app/model.pkl
 
-# Expose port (optional, depending on your Flask app setup)
-EXPOSE 5000
-
-# Run the Flask application when the container starts
+# Run the Flask application
 CMD ["python", "app.py"]
