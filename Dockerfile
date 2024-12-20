@@ -6,6 +6,7 @@ WORKDIR /app
 
 # Copy app files
 COPY . /app
+COPY model.pkl /app/
 
 # Install dependencies
 RUN pip install -r requirements.txt
