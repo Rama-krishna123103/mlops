@@ -7,8 +7,8 @@ print("Current directory:", os.getcwd())
 print("Directory contents:", os.listdir())  # List all files in the current directory
 
 # Load the model
-# model = joblib.load("model.pkl")
-model = joblib.load("/app/model.pkl")
+model = joblib.load("model.pkl")
+
 
 
 # Initialize Flask app
