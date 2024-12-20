@@ -5,7 +5,7 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Copy app files
-COPY C:/mlopsdn /app/
+COPY . /app/
 
 RUN echo "Hello"
 
