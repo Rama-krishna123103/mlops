@@ -3,7 +3,7 @@ FROM python:3.9-slim
 
 # Set working directory
 WORKDIR /app
-
+RUN python train.py
 # Copy all files into the container
 COPY . /app/
 
@@ -11,7 +11,7 @@ COPY . /app/
 RUN pip install -r requirements.txt
 
 # Train the model and save it as model.pkl
-RUN python train.py
+
 
 # Expose port for the Flask app
 EXPOSE 5000
