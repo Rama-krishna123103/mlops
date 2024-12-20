@@ -10,7 +10,7 @@ COPY . /app/
 # Install dependencies
 RUN pip install -r requirements.txt
 
-COPY .
+
 
 # Expose port for the Flask app
 EXPOSE 5000
