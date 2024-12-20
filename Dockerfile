@@ -10,8 +10,7 @@ COPY . /app/
 # Install dependencies
 RUN pip install -r requirements.txt
 
-# Train the model and save it as model.pkl
-RUN python train.py
+COPY .
 
 # Expose port for the Flask app
 EXPOSE 5000
