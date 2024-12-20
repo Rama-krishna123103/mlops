@@ -3,17 +3,15 @@ FROM python:3.9-slim
 
 # Set working directory
 WORKDIR /app
-RUN python train.py
-# Copy all files into the container
-COPY . /app/
+
+# Copy app files
+COPY . /app
 
 # Install dependencies
 RUN pip install -r requirements.txt
 
-
-
-# Expose port for the Flask app
+# Expose port
 EXPOSE 5000
 
-# Run the Flask app
+# Run the application
 CMD ["python", "app.py"]
