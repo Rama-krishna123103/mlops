@@ -6,7 +6,7 @@ WORKDIR /app
 
 # Copy app files
 COPY . /app/
-COPY ./mlopsdn /app/
+
 
 RUN echo "Hello"
 
