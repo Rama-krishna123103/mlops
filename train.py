@@ -1,39 +1,33 @@
+# train_model.py
+import numpy as np
 import pandas as pd
-import joblib
+from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import mean_squared_error
+import joblib
 
-# Training function
-def train_model():
-    # Load dataset
-    data = pd.read_csv('https://raw.githubusercontent.com/mwaskom/seaborn-data/master/iris.csv')
-    X = data.drop('species', axis=1)
-    y = data['species']
+# Generate dummy data
+data = pd.DataFrame({
+    "x": np.linspace(0, 10, 100),
+    "y": np.linspace(0, 10, 100) + np.random.normal(0, 1, 100)
+})
 
-    # Split data
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# Features and target
+X = data[["x"]]
+y = data["y"]
 
-    # Train model
-    model = RandomForestClassifier()
-    model.fit(X_train, y_train)
+# Split the data
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-    # Evaluate
-    predictions = model.predict(X_test)
-    print(f"Accuracy: {accuracy_score(y_test, predictions)}")
+# Train a simple linear regression model
+model = LinearRegression()
+model.fit(X_train, y_train)
 
-    # Save model
-    joblib.dump(model, 'model.pkl')
-    print("Model saved as 'model.pkl'")
+# Test the model
+predictions = model.predict(X_test)
+mse = mean_squared_error(y_test, predictions)
+print(f"Model Mean Squared Error: {mse:.2f}")
 
-# Prediction function
-def predict(data):
-    # Load model
-    model = joblib.load('model.pkl')
-
-    # Predict
-    predictions = model.predict(data)
-    return predictions
-
-if __name__ == "__main__":
-    train_model()
+# Save the model
+joblib.dump(model, "model.pkl")
+print("Model saved as model.pkl")
