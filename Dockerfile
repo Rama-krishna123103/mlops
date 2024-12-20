@@ -4,15 +4,14 @@ FROM python:3.9-slim
 # Set working directory
 WORKDIR /app
 
-# Copy app files
-COPY . /app
-COPY ..
+# Copy all app files including the pre-generated model.pkl
+COPY . /app/
 
 # Install dependencies
 RUN pip install -r requirements.txt
 
-# Expose port
+# Expose port for the Flask app
 EXPOSE 5000
 
-# Run the application
+# Run the Flask app
 CMD ["python", "app.py"]
