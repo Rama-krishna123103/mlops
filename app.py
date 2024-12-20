@@ -2,9 +2,14 @@
 from flask import Flask, request, jsonify
 import joblib
 import numpy as np
+import os
+print("Current directory:", os.getcwd())
+print("Directory contents:", os.listdir())  # List all files in the current directory
 
 # Load the model
-model = joblib.load("model.pkl")
+# model = joblib.load("model.pkl")
+model = joblib.load("/app/model.pkl")
+
 
 # Initialize Flask app
 app = Flask(__name__)
