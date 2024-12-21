@@ -12,7 +12,7 @@ RUN echo "Hello"
 
 # Install dependencies
 RUN pip install -r requirements.txt
-RUN python /app/train.py
+
 # Expose port
 EXPOSE 5000
 
